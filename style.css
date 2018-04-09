@@ -5,3 +5,7 @@ h2, h3, h4 {
 body {
     margin: 10px;
 }
+
+ul li {
+    margin-bottom: 7px;
+}
