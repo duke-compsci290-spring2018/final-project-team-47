@@ -8,9 +8,40 @@
   </head>
 
 <body>
-<h2>Final Project Plan</h2>
-<h3>Following the FIFA World Cup</h3>
-<h4>Tara Nagar (tln11) and Kiran Nagar (kan20)</h4>
+<h2 class="center">Final Project Plan</h2>
+<h3 class="center">Following the FIFA World Cup</h3>
+<h4 class="center">Tara Nagar (tln11) and Kiran Nagar (kan20)</h4>
+<a class="center" href="https://taranagar.wixsite.com/mysite">View Site Mock Up (modals not included)</a>
+<h3>Data</h3>
+<h3>Site Features</h3>
+<h4>All Users:</h4>
+<h4 class="feature">Home</h4>
+<p>
+The homepage of the website will have general information about the tournament, including group fixtures, standings, live games, and upcoming games. The eight groups will be displayed in a grid with the country name, along with stats about wins, losses, draws, goals for, goals against, and points if the tournament has commenced, and the groups will be sorted by leading teams. Otherwise, they will be displayed alphabetically. The live and upcoming matches will be displayed in a scrolling carousel at the top of the page, and if a user clicks on the match fixture, a modal will pop up that displays live stats and events if the game is in progress, or else team and head-to-head statistics displayed in intriguing data visualizations if the match is upcoming (elaborated on below). 
+</p>
+    
+<h4 class="feature">Schedule</h4>
+<p>
+This page will feature a schedule of the whole tournament. The completed games will be located at the bottom of the screen and have the teams that competed as well as the final score of the game. Clicking on these matchups will show a similar modal to the one showed on the first page, including important events (goals, yellow/red cards, etc.) and team statistics. The live games will show the score and the minute that the game is in, and clicking on the matchup will show modals with the same information as is displayed in the modals on the Home page. Users will be able to filter the matches by team or view future, live, or completed matches.
+</p>
 
+<h4 class="feature">Team Statistics</h4>
+<p>
+Members will be able to view many statistics revolving around each squad for all 32 teams in the tournament. This will be manifested across many different statistics. Some examples that we have thought of have been age of the players, number of appearances they’ve made for their country, height, position, and career goals or assists in international competitions. There are a few different API’s and frameworks which could be used to accomplish this goal. There is a script on GitHub which was written by a developer named Dhvanil Patel to scrape data of football players from WikiPedia and put it into a CSV file, or a text file of Comma Separated Values. From a more targeted version of that, biographical data about World Cup players can be put into a discrete data structure. Once the data is compiled, we will be able to use an API such as Keen.io or d3.js, both of which are built in order to facilitate data visualization. 
+</p>
+
+<h4 class="feature">Completed Match Statistics</h4>
+<p>
+Once matches have been played, members will have the ability to view scores and look at statistics from those matches. There are a couple of World Cup APIs which we will be able to implement in order to parse results and statistics, and once we do so, we could use those data visualization frameworks again in order to compare statistics throughout the match such as possession, shots, fouls, offsides, etc. This should give the user an immersive, informative experience which is simultaneously elegant for the casual fan yet powerful for the statistic freak. Once the match has concluded, we should be able to embed video of the highlights of the match to be displayed as part of the data surrounding a match. We imagine that the way this will look from a UI-perspective is that the fixture lists will be displayed on a page (likely by matchday or date) and that once the user decides which match they are interested in, details about that match will be displayed in a modal which will include match facts, visual representations of statistics, and any video highlights available.
+</p>
+    
+<h4>Registered Users Only:</h4>
+<h4 class="feature">Favorites</h4>
+<p>
+The favorites feature will allow the user to star teams and follow along with them throughout the entire World Cup. We will store users and their favorite teams in Firebase. Users will see their starred teams show up in their own pane, and will have much easier access to their different teams’ stats and upcoming matchups. In addition, members will have the ability to enable text notifications when their teams start and finish playing. Of course, this won’t be as useful in the demo, since the games will not be live yet, but this summer in Russia 2018, it will be a really nifty feature. While text notifications seem hard to implement, there is a company called Twilio which provides an API for voice and text notification and integration into web apps.
+</p>
+    
+<h4>Administrators Only:</h4>
+<p>Administrators will be able to manage users and add/remove them and, overall, monitor the usage of the site adn modify it as they see fit.</p>
 </body>
 </html>
