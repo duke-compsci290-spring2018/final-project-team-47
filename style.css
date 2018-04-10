@@ -8,14 +8,8 @@
 
 body {
     margin: 10px;
-    background-image: url("world-cup.jpg");
 }
 
 ul li {
     margin-bottom: 7px;
-}
-
-footer {
-    position: absolute;
-    bottom: 0;
 }
