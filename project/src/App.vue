@@ -1,36 +1,41 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+<template onresize="checkWidth">
+<div id="app" class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-lg-4" v-for="grp in groups">
+            <group :group="grp.group"></group>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
+import Group from './components/Group';
+import GROUPS_DATA from './assets/group_results.json';
+    
+var GRP_RESULTS_URL = 'http://worldcup.sfg.io/teams/group_results'
+
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    name: 'app',
+    data () {
+        return {
+            groups: GROUPS_DATA,
+            curr_group: 0
+        }
+    },
+    components: {
+        Group
+    },
+    mounted: function() {
+        
+    },
+    computed: {
+    
     }
-  }
 }
 </script>
 
 <style lang="scss">
+    
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

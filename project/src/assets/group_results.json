@@ -1,0 +1,229 @@
+[{
+	"group": {
+		"id": 1,
+		"letter": "A",
+		"teams": [{
+			"team": {
+				"id": 1,
+				"country": "Canada",
+				"fifa_code": "CAN",
+				"points": 8,
+				"goal_differential": 1
+			}
+		}, {
+			"team": {
+				"id": 21,
+				"country": "China",
+				"fifa_code": "CHN",
+				"points": 7,
+				"goal_differential": 0
+			}
+		}, {
+			"team": {
+				"id": 13,
+				"country": "Netherlands",
+				"fifa_code": "NED",
+				"points": 4,
+				"goal_differential": -1
+			}
+		}, {
+			"team": {
+				"id": 23,
+				"country": "New Zealand",
+				"fifa_code": "NZL",
+				"points": 2,
+				"goal_differential": -1
+			}
+		}]
+	}
+}, {
+	"group": {
+		"id": 2,
+		"letter": "B",
+		"teams": [{
+			"team": {
+				"id": 19,
+				"country": "Germany",
+				"fifa_code": "GER",
+				"points": 13,
+				"goal_differential": 14
+			}
+		}, {
+			"team": {
+				"id": 11,
+				"country": "Norway",
+				"fifa_code": "NOR",
+				"points": 7,
+				"goal_differential": 5
+			}
+		}, {
+			"team": {
+				"id": 22,
+				"country": "Thailand",
+				"fifa_code": "THA",
+				"points": 3,
+				"goal_differential": -7
+			}
+		}, {
+			"team": {
+				"id": 15,
+				"country": "Ivory Coast",
+				"fifa_code": "CIV",
+				"points": 0,
+				"goal_differential": -13
+			}
+		}]
+	}
+}, {
+	"group": {
+		"id": 3,
+		"letter": "C",
+		"teams": [{
+			"team": {
+				"id": 16,
+				"country": "Japan",
+				"fifa_code": "JPN",
+				"points": 18,
+				"goal_differential": 3
+			}
+		}, {
+			"team": {
+				"id": 14,
+				"country": "Cameroon",
+				"fifa_code": "CMR",
+				"points": 6,
+				"goal_differential": 5
+			}
+		}, {
+			"team": {
+				"id": 17,
+				"country": "Switzerland",
+				"fifa_code": "SUI",
+				"points": 3,
+				"goal_differential": 6
+			}
+		}, {
+			"team": {
+				"id": 6,
+				"country": "Ecuador",
+				"fifa_code": "ECU",
+				"points": 0,
+				"goal_differential": -16
+			}
+		}]
+	}
+}, {
+	"group": {
+		"id": 4,
+		"letter": "D",
+		"teams": [{
+			"team": {
+				"id": 2,
+				"country": "United States",
+				"fifa_code": "USA",
+				"points": 19,
+				"goal_differential": 11
+			}
+		}, {
+			"team": {
+				"id": 24,
+				"country": "Australia",
+				"fifa_code": "AUS",
+				"points": 7,
+				"goal_differential": 0
+			}
+		}, {
+			"team": {
+				"id": 12,
+				"country": "Sweden",
+				"fifa_code": "SWE",
+				"points": 3,
+				"goal_differential": -3
+			}
+		}, {
+			"team": {
+				"id": 18,
+				"country": "Nigeria",
+				"fifa_code": "NGA",
+				"points": 1,
+				"goal_differential": -3
+			}
+		}]
+	}
+}, {
+	"group": {
+		"id": 5,
+		"letter": "E",
+		"teams": [{
+			"team": {
+				"id": 7,
+				"country": "Brazil",
+				"fifa_code": "BRA",
+				"points": 9,
+				"goal_differential": 3
+			}
+		}, {
+			"team": {
+				"id": 20,
+				"country": "Korea Republic",
+				"fifa_code": "KOR",
+				"points": 4,
+				"goal_differential": -4
+			}
+		}, {
+			"team": {
+				"id": 4,
+				"country": "Costa Rica",
+				"fifa_code": "CRC",
+				"points": 2,
+				"goal_differential": -1
+			}
+		}, {
+			"team": {
+				"id": 10,
+				"country": "Spain",
+				"fifa_code": "ESP",
+				"points": 1,
+				"goal_differential": -2
+			}
+		}]
+	}
+}, {
+	"group": {
+		"id": 6,
+		"letter": "F",
+		"teams": [{
+			"team": {
+				"id": 8,
+				"country": "England",
+				"fifa_code": "ENG",
+				"points": 15,
+				"goal_differential": 3
+			}
+		}, {
+			"team": {
+				"id": 9,
+				"country": "France",
+				"fifa_code": "FRA",
+				"points": 9,
+				"goal_differential": 7
+			}
+		}, {
+			"team": {
+				"id": 5,
+				"country": "Colombia",
+				"fifa_code": "COL",
+				"points": 4,
+				"goal_differential": -1
+			}
+		}, {
+			"team": {
+				"id": 3,
+				"country": "Mexico",
+				"fifa_code": "MEX",
+				"points": 1,
+				"goal_differential": -6
+			}
+		}]
+	}
+}]
