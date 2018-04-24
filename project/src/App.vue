@@ -1,5 +1,6 @@
 <template onresize="checkWidth">
 <div id="app" class="container">
+    <h3 class="gray-title">Group Standings</h3>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-lg-4" v-for="grp in groups">
             <group :group="grp.group"></group>

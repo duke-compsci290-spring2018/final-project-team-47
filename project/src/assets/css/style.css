@@ -24,3 +24,8 @@ h1 {
     opacity: 1;
     text-align: center;
 }
+
+.gray-title {
+    color: darkgray;
+    margin-bottom: 30px;
+}
