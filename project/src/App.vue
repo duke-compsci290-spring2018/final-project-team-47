@@ -2,7 +2,7 @@
     <div id="app">
         <div id="header">
             <div class="top-bar">
-                <h3>Your World Cup</h3>
+                <h3>this is <strong>your</strong> World Cup</h3>
                 <authentication class="right" :getUser="getUser" :setUser="setUser">Log In</authentication>
             </div>
             <div class="title-box">
