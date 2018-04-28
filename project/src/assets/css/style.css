@@ -6,6 +6,33 @@
     vertical-align: middle;
 }
 
+.top-bar {
+    background-color: aliceblue;
+    text-align: left;
+}
+
+.top-bar h3 {
+    color: #007bff;
+    padding: 10px;
+}
+
+.top-bar h3 {
+    color: #007bff;
+    padding: 10px;
+}
+
+.left {
+    float: left;
+    text-align: left;
+}
+
+.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+}
+
 .title-box {
     max-width: 30%;
     padding: 125px 0;

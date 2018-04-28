@@ -1,6 +1,10 @@
 <template>
     <div id="app">
         <div id="header">
+            <div class="top-bar">
+                <h3>Your World Cup</h3>
+                <authentication class="right" :getUser="getUser" :setUser="setUser">Log In</authentication>
+            </div>
             <div class="title-box">
                 <div class="box">
                     <h1>FIFA World Cup</h1>
@@ -11,7 +15,7 @@
             <ul class="container-flex">
                 <router-link :to="{name: 'Home'}">Home</router-link>
                 <router-link :to="{name: 'Schedule'}">Schedule</router-link>
-                <router-link :to="{name: 'Login', params: {getUser: getUser, setUser: setUser} }">Log In</router-link>
+                
             </ul>
         </nav>
         
@@ -21,9 +25,13 @@
 
 <script>
 import database from './database'
+import Authentication from './components/Authentication'
     
 export default {
     name: 'app',
+    components: {
+        Authentication
+    },
     data () {
         return {
             user: null
@@ -52,6 +60,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+/*
+    
+    authentication {
+        width: 100%;
+    }
+*/
 </style>
 <!--
 <template onresize="checkWidth">
