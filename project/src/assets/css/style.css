@@ -29,3 +29,30 @@ h1 {
     color: darkgray;
     margin-bottom: 30px;
 }
+
+.center {
+    align-content: center;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0;
+}
+
+.container-flex a {
+    font-size: 20px;
+}
+
+.container-flex a:hover {
+    text-decoration: none;
+    font-style: italic;
+}
+
+nav {
+    background-color: aliceblue;
+}
+
+.container-full {
+    max-width: 100%;
+}

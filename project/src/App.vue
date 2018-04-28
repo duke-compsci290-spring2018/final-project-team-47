@@ -1,3 +1,59 @@
+<template>
+    <div id="app">
+        <div id="header">
+            <div class="title-box">
+                <div class="box">
+                    <h1>FIFA World Cup</h1>
+                </div>
+            </div>
+        </div>
+        <nav class="container container-full">
+            <ul class="container-flex">
+                <router-link :to="{name: 'Home'}">Home</router-link>
+                <router-link :to="{name: 'Schedule'}">Schedule</router-link>
+                <router-link :to="{name: 'Login', params: {getUser: getUser, setUser: setUser} }">Log In</router-link>
+            </ul>
+        </nav>
+        
+        <router-view></router-view>
+    </div>
+</template>
+
+<script>
+import database from './database'
+    
+export default {
+    name: 'app',
+    data () {
+        return {
+            user: null
+        }
+    },
+    firebase: {
+        
+    },
+    methods:  {
+        getUser () {
+            return this.user;
+        },
+        setUser (user) {
+            this.user = user;
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+    
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+</style>
+<!--
 <template onresize="checkWidth">
 <div id="app" class="container">
     <h3 class="gray-title">Group Standings</h3>
@@ -64,3 +120,4 @@ a {
   color: #42b983;
 }
 </style>
+-->
