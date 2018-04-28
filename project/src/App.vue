@@ -15,7 +15,7 @@
             <ul class="container-flex">
                 <router-link :to="{name: 'Home'}">Home</router-link>
                 <router-link :to="{name: 'Schedule'}">Schedule</router-link>
-                
+                <router-link :to="{name: 'Favorites'}">Favorites</router-link>
             </ul>
         </nav>
         

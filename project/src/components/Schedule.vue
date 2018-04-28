@@ -1,5 +1,5 @@
 <template>
     <div id="schedule">
-        <h1>Schedule goes here</h1>
+        <p>Schedule goes here</p>
     </div>
 </template>

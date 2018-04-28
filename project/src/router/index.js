@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../components/Home'
 import Schedule from '../components/Schedule'
+import Favorites from '../components/Favorites'
 import Authentication from '../components/Authentication'
 
 Vue.use(Router)
@@ -17,6 +18,11 @@ export default new Router({
         path: '/schedule',
         name: 'Schedule',
         component: Schedule
+    },
+    {
+        path: '/favorites',
+        name: 'Favorites',
+        component: Favorites
     },
     {
       path: '/login',
