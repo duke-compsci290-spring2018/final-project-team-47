@@ -22,7 +22,6 @@
           <td>{{ entry.position }}</td>
           <td><img class="small-img" :src='entry.crestURI' /></td>
           <td><router-link :to="{name: 'Team', params: {team: team, players: players}}">{{ entry.teamName }}</router-link></td>
-          <td>{{ entry.teamName }}</td>
           <td>{{ entry.playedGames }}</td>
           <td>{{ entry.wins }}</td>
           <td>{{ entry.draws }}</td>
