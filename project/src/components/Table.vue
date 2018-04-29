@@ -1,5 +1,6 @@
 <template>
   <div id="table-container" class="container center">
+    <h4>Current Standings</h4>
     <table>
       <thead>
         <tr>

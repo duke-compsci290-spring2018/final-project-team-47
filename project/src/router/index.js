@@ -5,6 +5,7 @@ import Table from '../components/Table'
 import Schedule from '../components/Schedule'
 import Favorites from '../components/Favorites'
 import Authentication from '../components/Authentication'
+import Team from '../components/Team'
 
 Vue.use(Router)
 
@@ -37,6 +38,12 @@ export default new Router({
       name: 'Login',
       props: true,
       component: Authentication
+    },
+    {
+      path: '/schedule/team',
+      name: 'Team',
+      props: true,
+      component: Team
     }
   ]
 })

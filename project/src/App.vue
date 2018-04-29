@@ -17,6 +17,7 @@
                 <router-link :to="{name: 'Table', params: {standing: standings}}">Latest</router-link>
                 <router-link :to="{name: 'Schedule', params: {matches: fixtures}}">Schedule</router-link>
                 <router-link :to="{name: 'Favorites'}">Favorites</router-link>
+                <router-link :to="{name: 'Team', params: {team: team, players: players}}">Team</router-link>
             </ul>
         </nav>
         <router-view></router-view>
@@ -46,7 +47,9 @@ export default {
             user: null,
             teams: 0,
             fixtures: 0,
-            standings: 0
+            standings: 0,
+            team: 0,
+            players: 0
         }
     },
     firebase: {
@@ -66,13 +69,30 @@ export default {
                 }
             });
         },
+        getTeam () {
+            return axios.get('http://api.football-data.org/v1/teams/65', {
+                headers: {
+                    'X-Auth-Token': API_KEY
+                }
+            });
+        },
+        getPlayers () {
+            return axios.get('http://api.football-data.org/v1/teams/65/players', {
+                headers: {
+                    'X-Auth-Token': API_KEY
+                }
+            });
+        },
         getData () {
-            Promise.all([this.getDatas(TEAMS), this.getDatas(FIXTURES), this.getDatas(TABLE)])
-                    .then(([teamData, fixData, tableData]) => {
+            Promise.all([this.getDatas(TEAMS), this.getDatas(FIXTURES), this.getDatas(TABLE), this.getTeam(), this.getPlayers()])
+                    .then(([teamData, fixData, tableData, teamD, players]) => {
                         this.teams = teamData.data.teams;
                         this.fixtures = fixData.data.fixtures;
                         this.standings = tableData.data.standing;
-                        console.log(this.standings);
+                        this.team = teamD.data;
+                        this.players = players.data.players;
+                        console.log(this.team);
+                        console.log(this.players);
                     });
         }
     },
