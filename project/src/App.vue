@@ -2,19 +2,20 @@
     <div id="app">
         <div id="header">
             <div class="top-bar">
-                <h3>this is <strong>your</strong> World Cup</h3>
+                <h3>this is <strong>your</strong> Premier League</h3>
                 <authentication class="right" :getUser="getUser" :setUser="setUser">Log In</authentication>
             </div>
             <div class="title-box">
                 <div class="box">
-                    <h1>FIFA World Cup</h1>
+                    <h1>English Premier League</h1>
                 </div>
             </div>
         </div>
         <nav class="container container-full">
             <ul class="container-flex">
                 <router-link :to="{name: 'Home'}">Home</router-link>
-                <router-link :to="{name: 'Schedule', params: {matches: match_schedule}}">Schedule</router-link>
+                <router-link :to="{name: 'Table', params: {standing: standings}}">Latest</router-link>
+                <router-link :to="{name: 'Schedule', params: {matches: fixtures}}">Schedule</router-link>
                 <router-link :to="{name: 'Favorites'}">Favorites</router-link>
             </ul>
         </nav>
@@ -30,8 +31,10 @@ import axios from 'axios'
 // local imports
 import { API_KEY } from './secrets'
     
-var TEAM_URL = 'http://api.football-data.org/v1/competitions/445/teams';
-var FIX_URL = 'http://api.football-data.org/v1/competitions/445/fixtures';
+var API_URL = 'http://api.football-data.org/v1/competitions/445';
+var TEAMS = '/teams';
+var FIXTURES = '/fixtures';
+var TABLE = '/leagueTable';
     
 export default {
     name: 'app',
@@ -42,7 +45,8 @@ export default {
         return {
             user: null,
             teams: 0,
-            fixtures: 0
+            fixtures: 0,
+            standings: 0
         }
     },
     firebase: {
@@ -55,52 +59,47 @@ export default {
         setUser (user) {
             this.user = user;
         },
-        getTeams () {
-            return axios.get(TEAM_URL, {
-                headers: {
-                    'X-Auth-Token': API_KEY
-                }
-            });
-        },
-        getFixtures () {
-            return axios.get(FIX_URL, {
+        getDatas (endpoint) {
+            return axios.get(API_URL + endpoint, {
                 headers: {
                     'X-Auth-Token': API_KEY
                 }
             });
         },
         getData () {
-            Promise.all([this.getTeams(), this.getFixtures()])
-                    .then(([teamData, fixData]) => {
+            Promise.all([this.getDatas(TEAMS), this.getDatas(FIXTURES), this.getDatas(TABLE)])
+                    .then(([teamData, fixData, tableData]) => {
                         this.teams = teamData.data.teams;
                         this.fixtures = fixData.data.fixtures;
+                        this.standings = tableData.data.standing;
+                        console.log(this.standings);
                     });
         }
     },
     computed: {
-        match_schedule () {
-            var sched = 0;
-            if (this.fixtures) {
-                console.log('getting fixtures');
-                sched = {};
-                for (var i = 0; i < this.fixtures.length; i++) {
-                    var fixture = this.fixtures[i]
-                    var date = fixture.date.split("T");
-                    var dt = date[0];
-                    var time = date[1]
-                    if (dt in sched) {
-                        if (time in sched[dt]) {
-                            sched[dt][time].push(fixture)
-                        } else {
-                            sched[dt][time] = [fixture];
-                        }
-                    } else {
-                        sched[dt] = {[time]: [fixture]};
-                    }
-                }
-            }
-            return [sched];
-        }
+//        match_schedule () {
+//            var sched = 0;
+//            if (this.fixtures) {
+//                console.log('getting fixtures');
+//                sched = {};
+//                for (var i = 0; i < this.fixtures.length; i++) {
+//                    var fixture = this.fixtures[i]
+//                    var date = fixture.date.split("T");
+//                    var dt = date[0];
+//                    var time = date[1]
+//                    if (dt in sched) {
+//                        if (time in sched[dt]) {
+//                            sched[dt][time].push(fixture)
+//                        } else {
+//                            sched[dt][time] = [fixture];
+//                        }
+//                    } else {
+//                        sched[dt] = {[time]: [fixture]};
+//                    }
+//                }
+//            }
+//            return [sched];
+//        }
     },
     created () {
         this.getData();

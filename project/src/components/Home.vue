@@ -1,11 +1,14 @@
 <template onresize="checkWidth">
 <div id="home" class="container">
+    <h3>Project Description</h3>
+<!--
     <h3 class="gray-title">Group Standings</h3>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-lg-4" v-for="grp in groups">
             <group :group="grp.group"></group>
         </div>
     </div>
+-->
 </div>
 </template>
 
@@ -16,7 +19,7 @@ import GROUPS_DATA from '../assets/group_results.json';
 var GRP_RESULTS_URL = 'http://worldcup.sfg.io/teams/group_results'
 
 export default {
-    name: 'home',
+    name: 'Home',
     data () {
         return {
             groups: GROUPS_DATA,
