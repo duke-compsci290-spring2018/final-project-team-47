@@ -31,6 +31,7 @@ export default new Router({
     {
         path: '/favorites',
         name: 'Favorites',
+        props: true,
         component: Favorites
     },
     {

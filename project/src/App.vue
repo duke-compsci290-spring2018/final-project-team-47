@@ -16,7 +16,7 @@
                 <router-link :to="{name: 'Home'}">Home</router-link>
                 <router-link :to="{name: 'Table', params: {standing: standings}}">Latest</router-link>
                 <router-link :to="{name: 'Schedule', params: {matches: fixtures}}">Schedule</router-link>
-                <router-link :class="{ disabled: user===null}" :to="{name: 'Favorites'}">Favorites</router-link>
+                <router-link :class="{ disabled: user===null}" :to="{name: 'Favorites', params: {teams: teams, size: teams.length}}">Favorites</router-link>
             </ul>
         </nav>
         <router-view></router-view>
@@ -54,9 +54,6 @@ export default {
         
     },
     methods:  {
-        getTeams () {
-            console.log(this.$store.getters.teams);
-        },
         getUser () {
             return this.user;
         },
@@ -82,7 +79,6 @@ export default {
                     .then(([teamData, fixData, tableData]) => {
                         this.teams = teamData.data.teams;
                         this.teams.forEach(team => {
-                            console.log(team._links.players.href);
                             Promise.all([this.getTeamD(team._links.players.href)])
                                     .then(t => {
                                 this.$store.commit('addPlayers', t[0].data);

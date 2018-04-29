@@ -5,8 +5,8 @@
         <h3>Select your favorite teams</h3>
       </div>
       <div id="team_picker">
-        <select multiple size="{{ teams.length }}">
-          <option v-for="eachTeam in teams" value="{{ eachTeam.name }}">{{ eachTeam.name }}</option>
+        <select multiple size="size">
+          <option v-for="eachTeam in teams" value="eachTeam.name">{{ eachTeam.name }}</option>
         </select>
       </div>
     </div>
@@ -15,12 +15,10 @@
 <script>
 export default {
   name: 'favorites',
-  props: {
-    teams: {
-      type: Array,
-      required: true,
-    }
-  },
+  props: [
+      'teams',
+      'size'
+  ],
   methods: {
     getChecked() {
       var values = document.getElementById(team-picker).val();
