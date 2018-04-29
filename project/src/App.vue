@@ -26,6 +26,9 @@
 <script>
 import database from './database'
 import Authentication from './components/Authentication'
+import axios from 'axios'
+    
+var API_URL = 'http://api.football-data.org/v1/competitions/445/teams';
     
 export default {
     name: 'app',
@@ -34,7 +37,8 @@ export default {
     },
     data () {
         return {
-            user: null
+            user: null,
+            teams: 0
         }
     },
     firebase: {
@@ -46,7 +50,24 @@ export default {
         },
         setUser (user) {
             this.user = user;
+        },
+        getTeamData () {
+            console.log('get fixture data');
+            return this.getCORSData(API_URL);
+        },
+        getCORSData (url) {
+            const proxyURL = "https://cors-anywhere.herokuapp.com/";
+            fetch(proxyURL + url)
+                .then(response => response.json())
+                .then(contents => { 
+                    this.teams = contents.teams
+                    console.log(this.teams) 
+                })
+                .catch(() => console.log("Access to " + url + " is still blocked."))
         }
+    },
+    mounted () {
+        this.getTeamData();
     }
 }
 </script>
