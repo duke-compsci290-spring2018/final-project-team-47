@@ -2,12 +2,12 @@
     <div id="app">
         <div id="header">
             <div class="top-bar">
-                <h3>this is <strong>your</strong> Premier League</h3>
+                <h3>welcome to <strong>your</strong> Premier League</h3>
                 <authentication class="right" :getUser="getUser" :setUser="setUser">Log In</authentication>
             </div>
             <div class="title-box">
                 <div class="box">
-                    <h1 @click="getTeams">English Premier League</h1>
+                    <h1>English Premier League</h1>
                 </div>
             </div>
         </div>
@@ -85,34 +85,41 @@ export default {
                             })
                         });
                         this.fixtures = fixData.data.fixtures;
+                        console.log(fixData.data.fixtures);
+                        this.$store.commit('addFixtures', fixData.data.fixtures);
                         this.standings = tableData.data.standing;
                     });
         }
     },
     computed: {
-//        match_schedule () {
-//            var sched = 0;
-//            if (this.fixtures) {
-//                console.log('getting fixtures');
-//                sched = {};
-//                for (var i = 0; i < this.fixtures.length; i++) {
-//                    var fixture = this.fixtures[i]
-//                    var date = fixture.date.split("T");
-//                    var dt = date[0];
-//                    var time = date[1]
-//                    if (dt in sched) {
-//                        if (time in sched[dt]) {
-//                            sched[dt][time].push(fixture)
-//                        } else {
-//                            sched[dt][time] = [fixture];
-//                        }
-//                    } else {
-//                        sched[dt] = {[time]: [fixture]};
-//                    }
-//                }
-//            }
-//            return [sched];
-//        }
+        match_schedule () {
+            var sched = 0;
+            if (this.fixtures) {
+                console.log('getting fixtures');
+                sched = {};
+                for (var i = 0; i < this.fixtures.length; i++) {
+                    var fixture = this.fixtures[i]
+                    var date = fixture.date.split("T");
+                    var dt = date[0];
+                    var time = date[1]
+                    if (dt in sched) {
+                        if (time in sched[dt]) {
+                            sched[dt][time].push(fixture)
+                        } else {
+                            sched[dt][time] = [fixture];
+                        }
+                    } else {
+                        sched[dt] = {[time]: [fixture]};
+                    }
+                }
+            }
+            var sched_list = [];
+            for (var entry in sched) {
+                
+            }
+            console.log(sched);
+            return sched;
+        }
     },
     created () {
         this.getData();
