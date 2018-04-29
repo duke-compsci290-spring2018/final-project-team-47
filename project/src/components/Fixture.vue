@@ -10,7 +10,8 @@
                     <td> -v- </td>
                     <td>{{ fixture.awayTeamName }}</td>
                 </tr>
-                <tr>
+                <p v-if='fixture.status === "POSTPONED"'>Match Postponed</p>
+                <tr v-else>
                     <td>{{ fixture.result.goalsHomeTeam }}</td>
                     <td v-if='fixture.status === "FINISHED"'> - </td>
                     <td v-else></td>
