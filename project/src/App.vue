@@ -7,14 +7,14 @@
             </div>
             <div class="title-box">
                 <div class="box">
-                    <h1>English Premier League</h1>
+                    <h1 @click="getTeams">English Premier League</h1>
                 </div>
             </div>
         </div>
         <nav class="container container-full">
             <ul class="container-flex">
                 <router-link :to="{name: 'Home'}">Home</router-link>
-                <router-link :to="{name: 'Table', params: {standing: standings, team: team, players: players}}">Latest</router-link>
+                <router-link :to="{name: 'Table', params: {standing: standings}}">Latest</router-link>
                 <router-link :to="{name: 'Schedule', params: {matches: fixtures}}">Schedule</router-link>
                 <router-link :class="{ disabled: user===null}" :to="{name: 'Favorites'}">Favorites</router-link>
             </ul>
@@ -47,14 +47,16 @@ export default {
             teams: 0,
             fixtures: 0,
             standings: 0,
-            team: 0,
-            players: 0
+            player_urls: []
         }
     },
     firebase: {
         
     },
     methods:  {
+        getTeams () {
+            console.log(this.$store.getters.teams);
+        },
         getUser () {
             return this.user;
         },
@@ -68,30 +70,26 @@ export default {
                 }
             });
         },
-        getTeam () {
-            return axios.get('http://api.football-data.org/v1/teams/65', {
-                headers: {
-                    'X-Auth-Token': API_KEY
-                }
-            });
-        },
-        getPlayers () {
-            return axios.get('http://api.football-data.org/v1/teams/65/players', {
+        getTeamD (url) {
+            return axios.get(url, {
                 headers: {
                     'X-Auth-Token': API_KEY
                 }
             });
         },
         getData () {
-            Promise.all([this.getDatas(TEAMS), this.getDatas(FIXTURES), this.getDatas(TABLE), this.getTeam(), this.getPlayers()])
-                    .then(([teamData, fixData, tableData, teamD, players]) => {
+            Promise.all([this.getDatas(TEAMS), this.getDatas(FIXTURES), this.getDatas(TABLE)])
+                    .then(([teamData, fixData, tableData]) => {
                         this.teams = teamData.data.teams;
+                        this.teams.forEach(team => {
+                            console.log(team._links.players.href);
+                            Promise.all([this.getTeamD(team._links.players.href)])
+                                    .then(t => {
+                                this.$store.commit('addPlayers', t[0].data);
+                            })
+                        });
                         this.fixtures = fixData.data.fixtures;
                         this.standings = tableData.data.standing;
-                        this.team = teamD.data;
-                        this.players = players.data.players;
-                        console.log(this.team);
-                        console.log(this.players);
                     });
         }
     },

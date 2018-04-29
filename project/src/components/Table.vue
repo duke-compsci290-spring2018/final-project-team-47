@@ -21,7 +21,7 @@
         <tr v-for="entry in standing">
           <td>{{ entry.position }}</td>
           <td><img class="small-img" :src='entry.crestURI' /></td>
-          <td><router-link :to="{name: 'Team', params: {team: team, players: players}}">{{ entry.teamName }}</router-link></td>
+          <td><router-link :to="{name: 'Team', params: {team: entry, players: $store.getters.getPlayers(entry._links.team.href).players}}">{{ entry.teamName }}</router-link></td>
           <td>{{ entry.playedGames }}</td>
           <td>{{ entry.wins }}</td>
           <td>{{ entry.draws }}</td>
@@ -39,12 +39,20 @@
 <script>
 
 export default {
-  name: 'Table',
-  props: [
-        'standing',
-        'team',
-        'players'
-  ]
+    name: 'Table',
+    data () {
+        return {
+            team: ''
+        }
+    },
+    props: [
+        'standing'
+    ],
+    computed: {
+        getPlayers (team) {
+            return this.$store.getters.getPlayers(team);
+        }
+    }
 };
 
 </script>

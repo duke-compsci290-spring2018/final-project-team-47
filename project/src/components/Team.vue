@@ -1,9 +1,9 @@
 <template>
   <div id="squad-container" class="container">
     <div id="team-photo" class="container">
-      <img class="large-img" :src='team.crestUrl' />
+      <img class="large-img" :src='team.crestURI' />
     </div>
-    <h2>{{ team.name }}</h2>
+    <h2>{{ team.teamName }}</h2>
     <table>
       <thead>
         <tr>
@@ -30,11 +30,11 @@
 <script>
 
 export default {
-  name: 'Team',
-  props: [
+    name: 'Team',
+    props: [
         'team',
         'players'
-    ],
+    ]
 };
 
 </script>
