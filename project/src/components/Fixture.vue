@@ -7,7 +7,7 @@
             <tbody>
                 <tr>
                     <td>{{ fixture.homeTeamName }}</td>
-                    <td> v. </td>
+                    <td> -v- </td>
                     <td>{{ fixture.awayTeamName }}</td>
                 </tr>
                 <tr>
