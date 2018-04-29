@@ -17,6 +17,7 @@ export default new Router({
     {
         path: '/schedule',
         name: 'Schedule',
+        props: true,
         component: Schedule
     },
     {

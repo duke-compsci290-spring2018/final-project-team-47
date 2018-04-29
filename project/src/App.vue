@@ -14,11 +14,10 @@
         <nav class="container container-full">
             <ul class="container-flex">
                 <router-link :to="{name: 'Home'}">Home</router-link>
-                <router-link :to="{name: 'Schedule'}">Schedule</router-link>
+                <router-link :to="{name: 'Schedule', params: {matches: match_schedule}}">Schedule</router-link>
                 <router-link :to="{name: 'Favorites'}">Favorites</router-link>
             </ul>
         </nav>
-        
         <router-view></router-view>
     </div>
 </template>
@@ -26,9 +25,13 @@
 <script>
 import database from './database'
 import Authentication from './components/Authentication'
+// package imports
 import axios from 'axios'
+// local imports
+import { API_KEY } from './secrets'
     
-var API_URL = 'http://api.football-data.org/v1/competitions/445/teams';
+var TEAM_URL = 'http://api.football-data.org/v1/competitions/445/teams';
+var FIX_URL = 'http://api.football-data.org/v1/competitions/445/fixtures';
     
 export default {
     name: 'app',
@@ -38,7 +41,8 @@ export default {
     data () {
         return {
             user: null,
-            teams: 0
+            teams: 0,
+            fixtures: 0
         }
     },
     firebase: {
@@ -51,77 +55,55 @@ export default {
         setUser (user) {
             this.user = user;
         },
-        getTeamData () {
-            console.log('get fixture data');
-            return this.getCORSData(API_URL);
+        getTeams () {
+            return axios.get(TEAM_URL, {
+                headers: {
+                    'X-Auth-Token': API_KEY
+                }
+            });
         },
-        getCORSData (url) {
-            const proxyURL = "https://cors-anywhere.herokuapp.com/";
-            fetch(proxyURL + url)
-                .then(response => response.json())
-                .then(contents => { 
-                    this.teams = contents.teams
-                    console.log(this.teams) 
-                })
-                .catch(() => console.log("Access to " + url + " is still blocked."))
+        getFixtures () {
+            return axios.get(FIX_URL, {
+                headers: {
+                    'X-Auth-Token': API_KEY
+                }
+            });
+        },
+        getData () {
+            Promise.all([this.getTeams(), this.getFixtures()])
+                    .then(([teamData, fixData]) => {
+                        this.teams = teamData.data.teams;
+                        this.fixtures = fixData.data.fixtures;
+                    });
         }
-    },
-    mounted () {
-        this.getTeamData();
-    }
-}
-</script>
-
-<style lang="scss">
-    
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-/*
-    
-    authentication {
-        width: 100%;
-    }
-*/
-</style>
-<!--
-<template onresize="checkWidth">
-<div id="app" class="container">
-    <h3 class="gray-title">Group Standings</h3>
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-lg-4" v-for="grp in groups">
-            <group :group="grp.group"></group>
-        </div>
-    </div>
-</div>
-</template>
-
-<script>
-import Group from './components/Group';
-import GROUPS_DATA from './assets/group_results.json';
-    
-var GRP_RESULTS_URL = 'http://worldcup.sfg.io/teams/group_results'
-
-export default {
-    name: 'app',
-    data () {
-        return {
-            groups: GROUPS_DATA,
-            curr_group: 0
-        }
-    },
-    components: {
-        Group
-    },
-    mounted: function() {
-        
     },
     computed: {
-    
+        match_schedule () {
+            var sched = 0;
+            if (this.fixtures) {
+                console.log('getting fixtures');
+                sched = {};
+                for (var i = 0; i < this.fixtures.length; i++) {
+                    var fixture = this.fixtures[i]
+                    var date = fixture.date.split("T");
+                    var dt = date[0];
+                    var time = date[1]
+                    if (dt in sched) {
+                        if (time in sched[dt]) {
+                            sched[dt][time].push(fixture)
+                        } else {
+                            sched[dt][time] = [fixture];
+                        }
+                    } else {
+                        sched[dt] = {[time]: [fixture]};
+                    }
+                }
+            }
+            return [sched];
+        }
+    },
+    created () {
+        this.getData();
     }
 }
 </script>
@@ -134,25 +116,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
 </style>
--->
