@@ -16,8 +16,7 @@
                 <router-link :to="{name: 'Home'}">Home</router-link>
                 <router-link :to="{name: 'Table', params: {standing: standings, team: team, players: players}}">Latest</router-link>
                 <router-link :to="{name: 'Schedule', params: {matches: fixtures}}">Schedule</router-link>
-                <router-link :to="{name: 'Favorites'}">Favorites</router-link>
-<!--                <router-link :to="{name: 'Team', params: {team: team, players: players}}">Team</router-link>-->
+                <router-link :class="{ disabled: user===null}" :to="{name: 'Favorites'}">Favorites</router-link>
             </ul>
         </nav>
         <router-view></router-view>
@@ -136,5 +135,10 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+    
+    .disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
 
 </style>
