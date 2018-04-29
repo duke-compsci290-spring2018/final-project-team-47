@@ -1,7 +1,7 @@
 <template>
   <div id="squad-container" class="container">
     <div id="team-photo" class="container">
-      <img :src='team.crestUrl' />
+      <img class="large-img" :src='team.crestUrl' />
     </div>
     <h2>{{ team.name }}</h2>
     <table>
@@ -40,8 +40,5 @@ export default {
 </script>
 
 <style lang="scss">
-    img {
-        max-height: 200px;
-    }
 
 </style>

@@ -20,7 +20,8 @@
       <tbody>
         <tr v-for="entry in standing">
           <td>{{ entry.position }}</td>
-          <td><img :src='entry.crestURI' /></td>
+          <td><img class="small-img" :src='entry.crestURI' /></td>
+          <td><router-link :to="{name: 'Team', params: {team: team, players: players}}">{{ entry.teamName }}</router-link></td>
           <td>{{ entry.teamName }}</td>
           <td>{{ entry.playedGames }}</td>
           <td>{{ entry.wins }}</td>
@@ -41,17 +42,15 @@
 export default {
   name: 'Table',
   props: [
-        'standing'
+        'standing',
+        'team',
+        'players'
   ]
 };
 
 </script>
 
 <style lang="scss">
-    img {
-        max-height: 50px;
-    }
-    
     table {
         border-collapse: collapse;
         border-spacing: 10px;
