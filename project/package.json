@@ -10,6 +10,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.0",
     "chunk": "0.0.2",
     "firebase": "^4.13.1",
