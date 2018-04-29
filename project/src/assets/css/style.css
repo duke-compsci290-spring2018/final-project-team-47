@@ -6,6 +6,33 @@
     vertical-align: middle;
 }
 
+.top-bar {
+    background-color: aliceblue;
+    text-align: left;
+}
+
+.top-bar h3 {
+    color: #007bff;
+    padding: 10px;
+}
+
+.top-bar h3 {
+    color: #007bff;
+    padding: 10px;
+}
+
+.left {
+    float: left;
+    text-align: left;
+}
+
+.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 12px;
+}
+
 .title-box {
     max-width: 30%;
     padding: 125px 0;
@@ -28,4 +55,31 @@ h1 {
 .gray-title {
     color: darkgray;
     margin-bottom: 30px;
+}
+
+.center {
+    align-content: center;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0;
+}
+
+.container-flex a {
+    font-size: 20px;
+}
+
+.container-flex a:hover {
+    text-decoration: none;
+    font-style: italic;
+}
+
+nav {
+    background-color: aliceblue;
+}
+
+.container-full {
+    max-width: 100%;
 }

@@ -1,3 +1,94 @@
+<template>
+    <div id="app">
+        <div id="header">
+            <div class="top-bar">
+                <h3>this is <strong>your</strong> World Cup</h3>
+                <authentication class="right" :getUser="getUser" :setUser="setUser">Log In</authentication>
+            </div>
+            <div class="title-box">
+                <div class="box">
+                    <h1>FIFA World Cup</h1>
+                </div>
+            </div>
+        </div>
+        <nav class="container container-full">
+            <ul class="container-flex">
+                <router-link :to="{name: 'Home'}">Home</router-link>
+                <router-link :to="{name: 'Schedule'}">Schedule</router-link>
+                <router-link :to="{name: 'Favorites'}">Favorites</router-link>
+            </ul>
+        </nav>
+        
+        <router-view></router-view>
+    </div>
+</template>
+
+<script>
+import database from './database'
+import Authentication from './components/Authentication'
+import axios from 'axios'
+    
+var API_URL = 'http://api.football-data.org/v1/competitions/445/teams';
+    
+export default {
+    name: 'app',
+    components: {
+        Authentication
+    },
+    data () {
+        return {
+            user: null,
+            teams: 0
+        }
+    },
+    firebase: {
+        
+    },
+    methods:  {
+        getUser () {
+            return this.user;
+        },
+        setUser (user) {
+            this.user = user;
+        },
+        getTeamData () {
+            console.log('get fixture data');
+            return this.getCORSData(API_URL);
+        },
+        getCORSData (url) {
+            const proxyURL = "https://cors-anywhere.herokuapp.com/";
+            fetch(proxyURL + url)
+                .then(response => response.json())
+                .then(contents => { 
+                    this.teams = contents.teams
+                    console.log(this.teams) 
+                })
+                .catch(() => console.log("Access to " + url + " is still blocked."))
+        }
+    },
+    mounted () {
+        this.getTeamData();
+    }
+}
+</script>
+
+<style lang="scss">
+    
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+/*
+    
+    authentication {
+        width: 100%;
+    }
+*/
+</style>
+<!--
 <template onresize="checkWidth">
 <div id="app" class="container">
     <h3 class="gray-title">Group Standings</h3>
@@ -64,3 +155,4 @@ a {
   color: #42b983;
 }
 </style>
+-->
