@@ -1,5 +1,6 @@
 <template>
-  <div id="table-container" class="container">
+  <div id="table-container" class="container center">
+    <h4>Current Standings</h4>
     <table>
       <thead>
         <tr>
@@ -19,8 +20,8 @@
       <tbody>
         <tr v-for="entry in standing">
           <td>{{ entry.position }}</td>
-          <td><img :src="{{ entry.crestURI }}" /></td>
-          <td>{{ entry.teamName }}</td>
+          <td><img class="small-img" :src='entry.crestURI' /></td>
+          <td><router-link :to="{name: 'Team', params: {team: entry, players: $store.getters.getPlayers(entry._links.team.href).players}}">{{ entry.teamName }}</router-link></td>
           <td>{{ entry.playedGames }}</td>
           <td>{{ entry.wins }}</td>
           <td>{{ entry.draws }}</td>
@@ -28,6 +29,7 @@
           <td>{{ entry.goals }}</td>
           <td>{{ entry.goalsAgainst }}</td>
           <td>{{ entry.goalDifference }}</td>
+          <td>{{ entry.points }}</td>
         </tr>
       </tbody>
     </table>
@@ -37,16 +39,28 @@
 <script>
 
 export default {
-  name: 'table',
-  props: {
-    standing: {
-      type: Object,
-      required: true,
+    name: 'Table',
+    data () {
+        return {
+            team: ''
+        }
+    },
+    props: [
+        'standing'
+    ],
+    computed: {
+        getPlayers (team) {
+            return this.$store.getters.getPlayers(team);
+        }
     }
-  }
 };
 
 </script>
 
 <style lang="scss">
+    table {
+        border-collapse: collapse;
+        border-spacing: 10px;
+    }
+
 </style>
