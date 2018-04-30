@@ -4,19 +4,25 @@
         <h3>Favorite Teams</h3>
         <p>Mac Users: command-click to select multiple teams. PC Users: control-click to select multiple teams.</p>
       </div>
-      <div id="addFavorites-container" class="container">
-        <select id="pickTeams" multiple="multiple">
+      <div id="addFavorites-container" class="container row">
+        <select id="pickTeams" multiple="multiple" class="half-width">
           <option v-for="eachTeam in teams" v-bind:value="eachTeam.name" >{{ eachTeam.name }}</option>
         </select>
-      <button type="button" name="addTeams" @click="getChecked()">Add Teams</button>
+          <div class="half-width"><button type="button" name="addTeams" @click="getChecked()">Add Teams</button></div>
+      
       </div>
-<!--
-      <div id="removeFavorites-container" class="container">
-        <select id="deleteTeams">
-          <option v-for="eachFave in faves.child[getUserId().fbFavorites]"></option>
-        </select>
-      </div> -->
+    <div class="your-favorites">
+        <h3>Your Favorites</h3>
+        <table>
+            <tbody>
+                <tr v-for="fav in favoriteTeamsObjs">
+                    <td><img class="small-img" :src='fav.crestUrl' /></td>
+                    <td><router-link :to="{name: 'Team', params: {name: fav.name, team: fav, players: $store.getters.getPlayers(fav._links.self.href).players, fixtures: $store.getters.getFixtures(fav.name)}}">{{ fav.name }}</router-link></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 </template>
 
 <script>
@@ -32,7 +38,19 @@ export default {
   firebase: {
     faves: db.ref('users')
   },
-
+    computed: {
+        favoriteTeams () {
+            return ["Arsenal FC", "Leicester City FC", "Watford FC"]
+        },
+        favoriteTeamsObjs () {
+            var ret = [];
+            for (var i = 0; i < this.favoriteTeams.length; i++) {
+                ret.push(this.$store.getters.getTeam(this.favoriteTeams[i]));
+            }
+            console.log(ret);
+            return ret;
+        }
+    },
   methods: {
     getUserId() {
       var user = Firebase.auth().currentUser;
@@ -114,7 +132,7 @@ p {
 
 #pickTeams {
 
-  position: absolute;
+/*  position: absolute;*/
   width: 40%;
   left: 5%;
   border: 3px solid #007bff;
@@ -135,7 +153,7 @@ button {
   opacity: 0.6;
   display: inline-block;
   text-decoration: none;
-  position: absolute;
+/*  position: absolute;*/
   left: 5%;
   bottom: 12%;
 }
@@ -145,5 +163,12 @@ button:hover {
   opacity: 1;
   cursor: pointer;
 }
+    td {
+        padding: 5px;
+    }
+    
+    .half-width {
+        width: 50%;
+    }
 
 </style>
