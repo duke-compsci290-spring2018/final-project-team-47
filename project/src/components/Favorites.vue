@@ -10,13 +10,19 @@
         </select>
       <button type="button" name="addTeams" @click="getChecked()">Add Teams</button>
       </div>
+<!--
+      <div id="removeFavorites-container" class="container">
+        <select id="deleteTeams">
+          <option v-for="eachFave in faves.child[getUserId().fbFavorites]"></option>
+        </select>
+      </div> -->
     </div>
 </template>
 
 <script>
 import Firebase from 'firebase'
 var currUser;
-import { usersRef } from '../database'
+import { db } from '../database'
 export default {
   name: 'favorites',
   props: [
@@ -24,20 +30,24 @@ export default {
   ],
 
   firebase: {
-    faves: usersRef
+    faves: db.ref('users')
   },
 
   methods: {
     getUserId() {
       var user = Firebase.auth().currentUser;
       console.log(user.email);
-      if (user != null){
+      if (user != null) {
         console.log("not null");
+        db.ref('users/' + user.uid).update({
+          dummy: true
+        });
         return user.uid;
       }
     },
 
     getChecked() {
+      console.log(db.ref('users'));
       var select = document.querySelector("#pickTeams");
       var result = [];
       var options = select && select.options;
@@ -51,6 +61,7 @@ export default {
         }
       }
       console.log("first");
+      console.log(result);
       this.writeFavorites(result);
       console.log("done");
     },
@@ -59,30 +70,38 @@ export default {
 
     writeFavorites(favoriteTeams) {
       var userID = this.getUserId();
-      console.log("assigned userID");
       console.log(userID);
-      if (favoriteTeams) {
-        if (!usersRef.child[userID]) {
-          console.log("no child");
-          usersRef.child(userID).set({
-            fbFavorites: favoriteTeams
+      if(favoriteTeams) {
+        var temp;
+        console.log(temp);
+        var ref = db.ref('users/' + userID);
+        ref.once('value', function(snapshot) {
+          console.log("in snapshot");
+          temp = snapshot.child('fbFavorites').val();
+          console.log(temp);
+        });
+        console.log(temp);
+        if(!temp) {
+          console.log("temp was null");
+          db.ref('users/' + userID).update({
+            fbFavorites:favoriteTeams
           });
         } else {
-          var temp = usersRef.child[userID];
-          console.log(temp);
-          for (var i=0; i<favoriteTeams.length; i++) {
-            if (!temp.includes(favoriteTeams[i])) {
+          console.log("else block");
+          for(var i=0; i<favoriteTeams.length; i++) {
+            if(!(temp.includes(favoriteTeams[i]))) {
               temp.push(favoriteTeams[i]);
             }
           }
-          temp.sort();
-          usersRef.child(userID).set({
+          console.log(temp);
+          db.ref('users/' + userID).update({
             fbFavorites: temp
           });
         }
       }
     }
   }
+
 };
 
 </script>

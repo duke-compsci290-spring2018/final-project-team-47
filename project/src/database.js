@@ -14,4 +14,3 @@ var fbApp = Firebase.initializeApp(config);
 
 // global reference to remote database app
 export const db = fbApp.database();
-export const usersRef = db.ref('users');
