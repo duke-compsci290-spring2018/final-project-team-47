@@ -34,6 +34,11 @@
 import Schedule from './Schedule'
 export default {
     name: 'Team',
+    data () {
+        return {
+            
+        }
+    },
     props: [
         'team',
         'players',
@@ -41,7 +46,7 @@ export default {
     ],
     components: {
         Schedule
-    },
+    }
 };
 
 </script>

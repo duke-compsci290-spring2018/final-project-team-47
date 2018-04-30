@@ -1,5 +1,6 @@
 <template>
 <div class="card bg-light">
+<!--     @click="onClick"-->
     <div class="card-body">
         <h3>{{ date }}</h3>
         <h6>{{ time }}</h6>
@@ -18,22 +19,43 @@
                     <td>{{ fixture.result.goalsAwayTeam }}</td>
                 </tr>
             </tbody>
-    </table>
+        </table>
     </div>
 </div>
 </template>
 
 <script>
-
+// package imports
+import axios from 'axios'
+// local imports
+import { API_KEY } from '../secrets'
 export default {
     name: 'Fixture',
     props: [
         'fixture',
         'date',
         'time'
+//        ,
+//        'onClick'
     ],
     methods: {
-        
+        logFixture () {
+            console.log(this.fixture);
+        },
+        getFixture (url) {
+            return axios.get(url, {
+                headers: {
+                    'X-Auth-Token': API_KEY
+                }
+            });
+        },
+    },
+    created () {
+        Promise.all([this.getFixture(this.fixture._links.self.href)])
+                .then(t => {
+            console.log(t);
+//                    this.$store.commit('addHead');
+                })
     }
 };
 

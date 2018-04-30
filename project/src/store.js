@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         players: [],
-        fixtures: []
+        fixtures: [],
+        head2head: []
     },
     getters: {
         getPlayers: (state) => (team) => {
@@ -22,9 +23,6 @@ export const store = new Vuex.Store({
                 }
             }
             return fix;
-//            return state.fixtures.filter(fixture => {
-//                fixture.homeTeamName === team || fixture.awayTeamName === team;
-//            })
         }
     },
     mutations: {
@@ -33,6 +31,9 @@ export const store = new Vuex.Store({
         },
         addFixtures(state, fixture) {
             state.fixtures = fixture;
+        },
+        addHead(state, head) {
+            state.head2head.push(head);
         }
     }
 })

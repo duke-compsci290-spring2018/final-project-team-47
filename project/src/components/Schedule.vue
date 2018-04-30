@@ -1,30 +1,49 @@
 <template>
 <div id="schedule" class="container">
+    <h3>Schedule</h3>
     <div class="row">
-        <div class="col-lg-4 col-sm-6 col-xs-12" v-for="match in matches">
-            <fixture :fixture="match" :date="parseDate(match.date)" :time="parseTime(match.date)"></fixture>
+        <div @click="showModal(match)" class="col-lg-4 col-sm-6 col-xs-12" v-for="match, i in matches">
+            <fixture :fixture="match" :date="parseDate(match)" :time="parseTime(match.date)"></fixture>
         </div>
     </div>
+    <modal v-show="isShowModal" :url="url" @close="closeModal"></modal>
 </div>
 </template>
 
 <script>
 import Fixture from './Fixture'
+import Modal from './Modal'
 export default {
     name: 'Schedule',
     data () {
         return {
-            
+            isShowModal: false,
+            url: ''
         }
     },
     components: {
-        Fixture
+        Fixture,
+        Modal
     },
     props: [
         'matches'
     ],
     methods: {
-        parseDate(date) {
+        saySomething () {
+            console.log('say something');
+        },
+        showModal (match) {
+//            this.url = url;
+//            console.log('show modal');
+            console.log(match._links.self.href);
+            this.url = match._links.self.href;
+            this.isShowModal = true;
+        },
+        closeModal () {
+            this.isShowModal = false;
+        },
+        parseDate(match_date) {
+            var date = match_date.date;
 //            var date_time = date.split("T");
             var d = new Date(date);
             var date_split = d.toString().split(" ");
@@ -58,14 +77,13 @@ export default {
 </script>
 
 <style lang="scss">
-/*
-    #schedule {
-        margin: 5px;
-    }
-*/
     
     .container {
         margin-bottom: 40px;
+    }
+    
+    .container h3 {
+        padding-bottom: 20px;
     }
 
 </style>
