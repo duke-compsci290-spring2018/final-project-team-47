@@ -92,7 +92,7 @@ export default {
     #authentication {
         width: 100%;
     }
-    
+
     .popup {
         position: absolute;
         padding: 15px;
@@ -103,8 +103,13 @@ export default {
         left: 50%;
         transform: translate(-50%,0%);
     }
-    
+
     * {
         color: #007bff;
     }
+
+    #authentication a {
+      cursor: pointer;
+    }
+
 </style>

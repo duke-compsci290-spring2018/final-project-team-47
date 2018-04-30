@@ -10,7 +10,8 @@ var config = {
     storageBucket: "world-cup-final.appspot.com",
     messagingSenderId: "721061065500"
 }
-var fbApp = Firebase.initializeApp(config)
+var fbApp = Firebase.initializeApp(config);
 
 // global reference to remote database app
-export const db = fbApp.database()
+export const db = fbApp.database();
+export const usersRef = db.ref('users');

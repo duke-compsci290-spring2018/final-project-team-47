@@ -7,7 +7,7 @@
             </div>
             <div class="title-box">
                 <div class="box">
-                    <h1 @click="getTeams">English Premier League</h1>
+                    <h1>English Premier League</h1>
                 </div>
             </div>
         </div>
@@ -16,7 +16,7 @@
                 <router-link :to="{name: 'Home'}">Home</router-link>
                 <router-link :to="{name: 'Table', params: {standing: standings}}">Latest</router-link>
                 <router-link :to="{name: 'Schedule', params: {matches: fixtures}}">Schedule</router-link>
-                <router-link :class="{ disabled: user===null}" :to="{name: 'Favorites', params: {teams: teams, size: teams.length}}">Favorites</router-link>
+                <router-link :class="{ disabled: user===null}" :to="{name: 'Favorites', params: {teams: teams}}">Favorites</router-link>
             </ul>
         </nav>
         <router-view></router-view>
@@ -30,16 +30,16 @@ import Authentication from './components/Authentication'
 import axios from 'axios'
 // local imports
 import { API_KEY } from './secrets'
-    
+
 var API_URL = 'http://api.football-data.org/v1/competitions/445';
 var TEAMS = '/teams';
 var FIXTURES = '/fixtures';
 var TABLE = '/leagueTable';
-    
+
 export default {
     name: 'app',
     components: {
-        Authentication
+        Authentication,
     },
     data () {
         return {
@@ -50,9 +50,7 @@ export default {
             player_urls: []
         }
     },
-    firebase: {
-        
-    },
+
     methods:  {
         getUser () {
             return this.user;
@@ -121,7 +119,7 @@ export default {
 </script>
 
 <style lang="scss">
-    
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -129,7 +127,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-    
+
     .disabled {
         pointer-events: none;
         opacity: 0.6;
