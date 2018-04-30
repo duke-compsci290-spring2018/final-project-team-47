@@ -25,8 +25,15 @@ Hours spent: 60
 The two of us only worked together on this project.
 Firebase docs, w3 website, package documentation (vue, vue-router, etc).
 We used code from class and Piazza, but did not receive help from any TAs.
+We were not able to retrieve the Firebase data as we wanted.
+
+To develop this app to a higher level, we would want to do a number of things:
+    1) allow it to show multiple league and tournaments
 
 This website must be run on a non-secure Chrome browser because the APIs are being called as http requests rather than https.
+An account you can use to log in with is:
+    email: email@email.ocm
+    password: password
 
 Data: https://api.football-data.org/
     https://api.football-data.org/documentation

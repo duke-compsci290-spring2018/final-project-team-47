@@ -40,7 +40,11 @@ export default {
   },
     computed: {
         favoriteTeams () {
-            return ["Arsenal FC", "Leicester City FC", "Watford FC"]
+            return ["Arsenal FC", "Leicester City FC", "Watford FC"];
+//            var ref = db.ref('users/'+this.getUserId().child'fbFavorites');
+//            ref.once("")
+//            console.log(db.ref('users/'+this.getUserId()).child('fbFavorites').val());
+//            return db.ref('users/'+this.getUserId()).child('fbFavorites');
         },
         favoriteTeamsObjs () {
             var ret = [];
