@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
+        teams: [],
         players: [],
         fixtures: [],
         head2head: []
@@ -23,6 +24,22 @@ export const store = new Vuex.Store({
                 }
             }
             return fix;
+        },
+        getFixturesDay: (state) => (matchDay) => {
+            var mat = [];
+            if (matchDay === 0) {
+                mat = state.fixtures;
+            } else {
+                for (var i = 0; i < state.fixtures.length; i++) {
+                    if (state.fixtures[i].matchday === matchDay) {
+                        mat.push(state.fixtures[i]);
+                    }
+                }
+            }
+            return mat;
+        },
+        getTeam: (state) => (teamName) => {
+            return state.teams.find(team => team.name === teamName);
         }
     },
     mutations: {
@@ -34,6 +51,9 @@ export const store = new Vuex.Store({
         },
         addHead(state, head) {
             state.head2head.push(head);
+        },
+        addTeams(state, teams) {
+            state.teams = teams;
         }
     }
 })

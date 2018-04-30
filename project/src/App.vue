@@ -23,7 +23,7 @@
     </div>
 </template>
 
-<script>
+<script>    
 import database from './database'
 import Authentication from './components/Authentication'
 // package imports
@@ -31,7 +31,7 @@ import axios from 'axios'
 // local imports
 import { API_KEY } from './secrets'
 
-var API_URL = 'http://api.football-data.org/v1/competitions/445';
+//var API_URL = 'http://api.football-data.org/v1/competitions/452';
 var TEAMS = '/teams';
 var FIXTURES = '/fixtures';
 var TABLE = '/leagueTable';
@@ -43,6 +43,8 @@ export default {
     },
     data () {
         return {
+            api: 'http://api.football-data.org/v1/competitions',
+            comp: '/445',
             user: null,
             teams: 0,
             fixtures: 0,
@@ -50,7 +52,6 @@ export default {
             player_urls: []
         }
     },
-
     methods:  {
         getUser () {
             return this.user;
@@ -59,7 +60,7 @@ export default {
             this.user = user;
         },
         getDatas (endpoint) {
-            return axios.get(API_URL + endpoint, {
+            return axios.get(this.api_url + endpoint, {
                 headers: {
                     'X-Auth-Token': API_KEY
                 }
@@ -76,15 +77,17 @@ export default {
             Promise.all([this.getDatas(TEAMS), this.getDatas(FIXTURES), this.getDatas(TABLE)])
                     .then(([teamData, fixData, tableData]) => {
                         this.teams = teamData.data.teams;
+                        this.$store.commit('addTeams', teamData.data.teams);
                         this.teams.forEach(team => {
                             Promise.all([this.getTeamD(team._links.players.href)])
                                     .then(t => {
                                 this.$store.commit('addPlayers', t[0].data);
                             })
                         });
-                        this.fixtures = fixData.data.fixtures;
-                        console.log(fixData.data.fixtures);
-                        this.$store.commit('addFixtures', fixData.data.fixtures);
+                        var fix = fixData.data.fixtures;
+                        fix.reverse();
+                        this.fixtures = fix;
+                        this.$store.commit('addFixtures', fix);
                         this.standings = tableData.data.standing;
                     });
         }
@@ -93,7 +96,6 @@ export default {
         match_schedule () {
             var sched = 0;
             if (this.fixtures) {
-                console.log('getting fixtures');
                 sched = {};
                 for (var i = 0; i < this.fixtures.length; i++) {
                     var fixture = this.fixtures[i]
@@ -115,8 +117,13 @@ export default {
             for (var entry in sched) {
                 
             }
-            console.log(sched);
             return sched;
+        },
+        api_url () {
+            return this.api + this.comp;
+        },
+        ids () {
+            return this.comps;
         }
     },
     created () {
@@ -138,6 +145,45 @@ export default {
     .disabled {
         pointer-events: none;
         opacity: 0.6;
+    }
+    
+    .left-padding {
+        padding-left: 15px;
+    }
+    
+    .dropbtn {
+        background-color: lightgray;
+        color: black;
+        padding: 8px;
+        font-size: 12px;
+        border-radius: 5%;
+        margin-bottom: 20px;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown-content a:hover {
+        background-color: lightgray;
     }
 
 </style>

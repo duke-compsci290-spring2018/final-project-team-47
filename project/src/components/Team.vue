@@ -1,9 +1,6 @@
 <template>
   <div id="squad-container" class="container">
-    <div id="team-photo" class="container">
-      <img class="large-img" :src='team.crestURI' />
-    </div>
-    <h2>{{ team.teamName }}</h2>
+    <h2>{{ name }}</h2>
       <h4>Roster</h4>
         <table>
           <thead>
@@ -25,7 +22,6 @@
             </tr>
           </tbody>
         </table>
-      <h4 class="margin-above">Schedule</h4>
         <schedule :matches="fixtures"></schedule>
   </div>
 </template>
@@ -42,7 +38,8 @@ export default {
     props: [
         'team',
         'players',
-        'fixtures'
+        'fixtures',
+        'name'
     ],
     components: {
         Schedule

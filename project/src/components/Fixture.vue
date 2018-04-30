@@ -8,13 +8,13 @@
             <tbody>
                 <tr>
                     <td>{{ fixture.homeTeamName }}</td>
-                    <td> -v- </td>
+                    <td> v. </td>
                     <td>{{ fixture.awayTeamName }}</td>
                 </tr>
                 <p v-if='fixture.status === "POSTPONED"'>Match Postponed</p>
                 <tr v-else>
                     <td>{{ fixture.result.goalsHomeTeam }}</td>
-                    <td v-if='fixture.status === "FINISHED"'> - </td>
+                    <td v-if='fixture.status === "FINISHED"'>  </td>
                     <td v-else></td>
                     <td>{{ fixture.result.goalsAwayTeam }}</td>
                 </tr>
@@ -35,13 +35,8 @@ export default {
         'fixture',
         'date',
         'time'
-//        ,
-//        'onClick'
     ],
     methods: {
-        logFixture () {
-            console.log(this.fixture);
-        },
         getFixture (url) {
             return axios.get(url, {
                 headers: {
@@ -49,13 +44,6 @@ export default {
                 }
             });
         },
-    },
-    created () {
-        Promise.all([this.getFixture(this.fixture._links.self.href)])
-                .then(t => {
-            console.log(t);
-//                    this.$store.commit('addHead');
-                })
     }
 };
 
